@@ -1,4 +1,5 @@
 var UrlClientes = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=GetClientes';
+var UrlInsertCliente = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=InsertCliente';
 
 $(document).ready(function(){
     CargarClientes();
@@ -27,4 +28,33 @@ function CargarClientes(){
             }
         }
     });
+}
+
+function AgregarCliente(){
+    var datoscliente = {
+    NumeroCliente: $('#NumeroCliente').val(),
+    Nombres: $('#Nombres').val(),
+    Apellidos: $('#Apellidos').val(),
+    RTN: $('#RTN').val(),
+    FechaAfiliacion: $('#FechaAfiliacion').val(),
+    SaldoActual: $('#SaldoActual').val(),
+    NumeroCuenta:$('#NumeroCuenta').val()
+    };
+    var datosclientejson = JSON.stringify(datoscliente);
+
+    $.ajax({
+        url: UrlInsertCliente,
+        type:'POST',
+        data: datosclientejson,
+        datatype: 'JSON',
+        contenttype: 'application/json',
+        success: function(reponse){
+            console.log(reponse);
+            alert('Cliente Agregado de Manera Exitosa');
+        },
+        error: function(textStatus, errorThrown){
+            alert('Error al agregar cliente' + textStatus + errorThrown);
+        }
+    });
+    alert('Aviso')
 }
