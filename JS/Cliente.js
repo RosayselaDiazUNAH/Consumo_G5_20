@@ -1,5 +1,7 @@
 var UrlClientes = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=GetClientes';
 var UrlInsertCliente = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=InsertCliente';
+var UrlGetCliente = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=GetCliente';
+var UrlUpdateCliente = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=UpdateCliente';
 
 $(document).ready(function(){
     CargarClientes();
@@ -23,6 +25,9 @@ function CargarClientes(){
                 '<td>'+ MiItems[i].FechaAfiliacion +'</td>'  + 
                 '<td>'+ MiItems[i].SaldoActual +'</td>'  + 
                 '<td>'+ MiItems[i].NumeroCuenta +'</td>'  + 
+                '<td>'+
+                '<button class="btn btn-info" onclick="CargarCliente('+ MiItems[i].NumeroCliente +')">Editar</button>'+
+                '</td>'+
             '</tr>';
             $('#DataClientes').html(Valores);
             }
@@ -57,4 +62,61 @@ function AgregarCliente(){
         }
     });
     alert('Aviso')
+}
+
+function CargarCliente(NumeroCliente){
+    var datoscliente = {
+        NumeroCliente: NumeroCliente
+    };
+    var datosclientejson = JSON.stringify(datoscliente);
+
+    $.ajax({
+        url: UrlGetCliente, 
+        type: 'POST',
+        data: datosclientejson,                                      
+        datatype: 'JSON',
+        contenttype: 'application/json',
+        success: function(reponse){
+            var MiItems = reponse;
+            $('#NumeroCliente').val(MiItems[0].NumeroCliente);
+            $('#Nombres').val(MiItems[0].Nombres);
+            $('#Apellidos').val(MiItems[0].Apellidos);
+            $('#RTN').val(MiItems[0].RTN);
+            $('#FechaAfiliacion').val(MiItems[0].FechaAfiliacion);
+            $('#SaldoActual').val(MiItems[0].SaldoActual);
+            $('#NumeroCuenta').val(MiItems[0].NumeroCuenta);
+            var btnactualizar = '<input type="submit" id="btn_actualizar" onclick="ActualizarCliente(' + MiItems[0].NumeroCliente + ')"'+
+            'value="Actualizar Cliente" class="btn btn-primary"></input>';
+            $('#btnagregarcliente').html(btnactualizar);
+        }
+    });
+}
+
+function ActualizarCliente(NumeroCliente){
+    var datoscliente = {
+        NumeroCliente: NumeroCliente,
+        Nombres: $('#Nombres').val(),
+        Apellidos: $('#Apellidos').val(),
+        RTN: $('#RTN').val(),
+        FechaAfiliacion: $('#FechaAfiliacion').val(),
+        SaldoActual: $('#SaldoActual').val(),
+        NumeroCuenta:$('#NumeroCuenta').val()
+    };
+    var datosclientejson = JSON.stringify(datoscliente);
+
+    $.ajax({
+        url: UrlUpdateCliente,
+        type: 'PUT',
+        data: datosclientejson,
+        datatype: 'JSON',
+        contenttype: 'application/json',
+        success: function (reponse){
+            console.log(reponse);
+            alert("Cliente Actualizado");
+        },
+        error: function(textStatus, errorThrown){
+            alert('Error al actualizar Cliente' + textStatus + errorThrown);
+        }
+    });
+    alert('Aviso');
 }
