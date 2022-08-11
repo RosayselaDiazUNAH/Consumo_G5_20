@@ -2,6 +2,7 @@ var UrlClientes = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=GetC
 var UrlInsertCliente = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=InsertCliente';
 var UrlGetCliente = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=GetCliente';
 var UrlUpdateCliente = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=UpdateCliente';
+var UrlEliminarCliente = 'http://20.216.41.245:90/G5_20/controller/Cliente.php?opc=EliminarCliente';
 
 $(document).ready(function(){
     CargarClientes();
@@ -26,7 +27,10 @@ function CargarClientes(){
                 '<td>'+ MiItems[i].SaldoActual +'</td>'  + 
                 '<td>'+ MiItems[i].NumeroCuenta +'</td>'  + 
                 '<td>'+
-                '<button class="btn btn-info" onclick="CargarCliente('+ MiItems[i].NumeroCliente +')">Editar</button>'+
+                '<button class="btn btn-info" onclick="CargarCliente('+ MiItems[i].NumeroCliente +')">Editar Cliente</button>'+
+                '</td>'+
+                '<td>'+
+                '<button class="btn btn-danger" onclick="EliminarCliente('+ MiItems[i].NumeroCliente +')">Eliminar Cliente</button>'+
                 '</td>'+
             '</tr>';
             $('#DataClientes').html(Valores);
@@ -119,4 +123,24 @@ function ActualizarCliente(NumeroCliente){
         }
     });
     alert('Aviso');
+}
+
+function EliminarCliente(NumeroCliente){
+    var datoscliente = {
+        NumeroCliente: NumeroCliente
+    };
+    var datosclientejson = JSON.stringify(datoscliente);
+
+    $.ajax({
+        url: UrlEliminarCliente,
+        type: 'DELETE',
+        data: datosclientejson,
+        datatype: 'JSON',
+        contenttype: 'application/json',
+        success: function (response){
+            console.log(response);
+        }
+    });
+    alert("Cliente Eliminado")
+    CargarClientes();
 }
