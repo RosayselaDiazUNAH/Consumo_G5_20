@@ -1,0 +1,93 @@
+*{
+    margin: 5px;;
+    padding: 0;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box ;
+    box-sizing:border-box ;
+}
+
+body{
+    background: #082556;
+}
+.navegacion{
+    width:1300px auto;
+    margin:0 auto; 
+    background: rgb(255, 255, 255) ;
+   border-style:double;
+   border-color: rgb(255, 238, 0);
+   
+}
+.navegacion ul{
+ list-style:none ;
+ 
+}
+.menu >li{
+    display: inline-block;
+}
+
+.menu >li > a{
+    
+    display: block;
+    padding:10px 10px;
+    background: rgba(255, 255, 102  ) ;
+    background-size: auto;
+    border-style:outset;
+    color: rgb(238, 14, 14);
+    background-position: center;
+    color :hsl(0, 0%, 0%);
+    font-family: 'Open sans';
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-decoration: none;
+    justify-content: center;
+}
+.menu li a:hover{
+    color :hsla(6, 93%, 45%, 0.83);
+    transition: all .3s;
+}
+.brand img{
+    display: flex;
+  }
+ 
+.brand img{
+    width:150px;
+    height: 150px;
+    display: inline-block;
+    margin:auto;
+    margin-right: 10px;
+    justify-content: center;
+}
+.brand1 img{
+    width:100px;
+    height: 75px;
+    display: inline-block;
+    margin:10px ;
+    justify-content: center;
+}
+.brand2 img{
+    width:75px;
+    height: 75px;
+    display: inline-block;
+    margin:auto;
+    margin-right: 10px;
+    justify-content: center;
+   
+}
+
+/*PIE DE PAGINA*/
+footer{
+  position:static;  
+  margin-top:-10px ;
+  width:1300px auto;
+  margin: auto; 
+  padding: 0px;
+  clear: both;
+  background-color: rgb(255, 255, 255);
+  text-align:center;
+  color :hsl(247, 93%, 49%);
+  font-family: 'Times New Roman', Times, serif;
+  border-style:double;
+  border-color: rgb(255, 238, 0);
+}
+
+
