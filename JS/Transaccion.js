@@ -105,7 +105,6 @@ function ActualizarTransaccion(CodigoTransaccion){
         NumeroCuenta:$('#NumeroCuenta').val()
     };
     var datostransaccionjson = JSON.stringify(datostransaccion);
-    alert(datostransaccionjson);
     $.ajax({
         url: UrlActualizarTransaccion,
         type: 'PUT',
